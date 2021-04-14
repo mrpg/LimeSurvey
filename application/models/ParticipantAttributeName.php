@@ -483,25 +483,28 @@ class ParticipantAttributeName extends LSActiveRecord
         foreach ($models as $row) {
             $thisname = '';
             $thislang = '';
+            //Iterate through each language version of this attribute
             foreach ($row->participant_attribute_names_lang as $names) {
-//Iterate through each language version of this attribute
-                if ($thisname == "") {
-                    $thisname = $names->attribute_name;
-                    $thislang = $names->lang;
-                } //Choose the first item by default
                 if ($names->lang == Yii::app()->session['adminlang']) {
                     $thisname = $names->attribute_name;
                     $thislang = $names->lang;
+                    break;
                 } //Override the default with the admin language version if found
             }
+            if (!isset($thisname) || !$thisname) {
+                $thisname = $row->defaultname;
+            }
+            if (!isset($thislang) || !$thislang) {
+                $thislang = '';
+            }
 
-            $output[] = array(
-                'attribute_id' => $row->attribute_id,
-                'attribute_type' => $row->attribute_type,
+            $output[] = [
+                'attribute_id'      => $row->attribute_id,
+                'attribute_type'    => $row->attribute_type,
                 'attribute_display' => $row->visible,
-                'attribute_name' => $thisname,
-                'lang' => $thislang
-            );
+                'attribute_name'    => $thisname,
+                'lang'              => $thislang
+            ];
         }
 
         return $output;
