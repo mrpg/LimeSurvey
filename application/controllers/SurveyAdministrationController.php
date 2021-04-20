@@ -1510,7 +1510,7 @@ class SurveyAdministrationController extends LSBaseController
         $survey = Survey::model()->findByPk($iSurveyID);
         $datestamp = time();
         $date = date('YmdHis', $datestamp); //'His' adds 24hours+minutes to name to allow multiple deactiviations in a day
-        $DBDate = "date('Y-m-d H:i:s', $datestamp)";
+        $DBDate = date('Y-m-d H:i:s', $datestamp);
         $userID = Yii::app()->user->getId();
         $aData = array();
 
