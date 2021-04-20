@@ -30,7 +30,7 @@ class ArchivedTableSettings extends LSActiveRecord
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return [
-            ['survey_id, user_id, tbl_name, tbl_type, created, properties', 'required'],
+            ['survey_id, user_id, tbl_name, tbl_type, created', 'required'],
             ['survey_id, user_id', 'numerical', 'integerOnly' => true],
             ['tbl_name', 'length', 'max' => 255],
             ['tbl_type', 'length', 'max' => 10],
